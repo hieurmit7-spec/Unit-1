@@ -421,6 +421,48 @@
             gap: 1rem;
         }
 
+        /* Pagination */
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        .pagination button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            background: white;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .pagination button:hover { background: var(--primary-light); }
+        .pagination button.active { background: var(--primary); color: white; }
+        .pagination button:disabled { opacity: 0.35; cursor: not-allowed; }
+        .pagination .page-arrow {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            border: 2px solid #ddd;
+            background: white;
+            font-size: 1.2rem;
+        }
+        .pagination .page-arrow:hover:not(:disabled) { border-color: var(--primary); color: var(--primary); }
+        .pagination .page-info {
+            font-size: 0.85rem;
+            color: #888;
+            margin: 0 0.25rem;
+        }
+
         .flashcard {
             perspective: 1000px;
             height: 220px;
@@ -806,8 +848,8 @@
             <div class="cases-grid fade-in">
                 <!-- GO -->
                 <div class="case-card case-go">
-                    <div class="case-img" style="background-image: url('https://images.unsplash.com/photo-1585169777872-1c31d4a24755?w=600&q=80'); background-color: var(--go-light);">
-                        <img src="https://images.unsplash.com/photo-1585169777872-1c31d4a24755?w=600&q=80" alt="The Game of Go - Strategy board game" style="width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0;">
+                    <div class="case-img" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/2/2a/FloorGoban.JPG'); background-color: var(--go-light);">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/FloorGoban.JPG" alt="The Game of Go - Strategy board game" style="width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0;">
                         <div class="case-badge">Strategy</div>
                     </div>
                     <div class="case-body">
@@ -839,8 +881,8 @@
 
                 <!-- SPORTS -->
                 <div class="case-card case-sport">
-                    <div class="case-img" style="background-image: url('https://images.unsplash.com/photo-1461896836934-bd45ba8fcf9b?w=600&q=80'); background-color: var(--sport-light);">
-                        <img src="https://images.unsplash.com/photo-1461896836934-bd45ba8fcf9b?w=600&q=80" alt="Sports - Games that unify a nation" style="width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0;">
+                    <div class="case-img" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/b/b4/Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.jpg'); background-color: var(--sport-light);">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.jpg" alt="Sports - Games that unify a nation" style="width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0;">
                         <div class="case-badge">Society</div>
                     </div>
                     <div class="case-body">
@@ -871,10 +913,10 @@
             </div>
 
             <div class="filter-btns fade-in">
-                <button class="filter-btn active" onclick="filterCards('all')">All (18)</button>
-                <button class="filter-btn" onclick="filterCards('go')">The Game of Go</button>
+                <button class="filter-btn active" onclick="filterCards('all')">All (34)</button>
+                <button class="filter-btn" onclick="filterCards('go')">Strategy &amp; History</button>
                 <button class="filter-btn" onclick="filterCards('memory')">Memories</button>
-                <button class="filter-btn" onclick="filterCards('sport')">Sports</button>
+                <button class="filter-btn" onclick="filterCards('sport')">Sports &amp; Society</button>
                 <button class="filter-btn" onclick="filterCards('skill')">Reading Skills</button>
             </div>
 
@@ -957,6 +999,111 @@
                 </div>
 
                 <!-- MEMORY VOCABULARY -->
+
+                <div class="flashcard fc-go" data-cat="go" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Antiquity</div>
+                            <div class="pos">noun</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">The ancient past, especially the period of Greek and Roman civilizations.</div>
+                            <div class="vn">Thời cổ đại</div>
+                            <div class="example">"The game of Go dates back to antiquity, originating over 4,000 years ago in China."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard fc-go" data-cat="go" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Downfall</div>
+                            <div class="pos">noun</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">A loss of power, prosperity, or status; the cause of ruin.</div>
+                            <div class="vn">Sự sụp đổ</div>
+                            <div class="example">"Overconfidence can be the downfall of even the most skilled Go player."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard fc-go" data-cat="go" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Cede</div>
+                            <div class="pos">verb</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">To give up power, territory, or rights, especially unwillingly.</div>
+                            <div class="vn">Nhượng lại, nhường</div>
+                            <div class="example">"A wise Go player may cede a small corner to gain control of the center."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard fc-go" data-cat="go" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Scarcely</div>
+                            <div class="pos">adverb</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">Hardly; almost not; only just.</div>
+                            <div class="vn">Hầu như không</div>
+                            <div class="example">"One can scarcely imagine the number of possible moves in a game of Go."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard fc-go" data-cat="go" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Make Perfect Sense</div>
+                            <div class="pos">phrase</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">To be completely logical and easy to understand.</div>
+                            <div class="vn">Hoàn toàn hợp lý</div>
+                            <div class="example">"It makes perfect sense that Go teaches strategic thinking — the game is all about long-term planning."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard fc-go" data-cat="go" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Resuscitate</div>
+                            <div class="pos">verb</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">To revive or bring back to life, consciousness, or use.</div>
+                            <div class="vn">Hồi sinh, làm sống lại</div>
+                            <div class="example">"AI technology has helped resuscitate interest in the ancient game of Go worldwide."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard fc-go" data-cat="go" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Indisputable</div>
+                            <div class="pos">adjective</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">Unable to be challenged or denied; unquestionable.</div>
+                            <div class="vn">Không thể chối cãi</div>
+                            <div class="example">"The influence of Go on strategic thinking in East Asia is indisputable."</div>
+                        </div>
+                    </div>
+                </div>
                 <div class="flashcard fc-memory" data-cat="memory" onclick="this.classList.toggle('flipped')">
                     <div class="flashcard-inner">
                         <div class="flashcard-front">
@@ -1109,6 +1256,141 @@
                 </div>
 
                 <!-- READING SKILLS -->
+
+                <div class="flashcard fc-sport" data-cat="sport" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Patriotism</div>
+                            <div class="pos">noun</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">Love and devotion to one's country.</div>
+                            <div class="vn">Lòng yêu nước</div>
+                            <div class="example">"The Olympics often stir feelings of patriotism among citizens."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard fc-sport" data-cat="sport" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Engage In</div>
+                            <div class="pos">verb phrase</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">To participate or become involved in an activity.</div>
+                            <div class="vn">Tham gia vào</div>
+                            <div class="example">"People engage in sports not only for health but also for national pride."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard fc-sport" data-cat="sport" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Nationalistic Pride</div>
+                            <div class="pos">noun phrase</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">A strong feeling of pride in one's nation, often expressed through support of national symbols or teams.</div>
+                            <div class="vn">Niềm tự hào dân tộc</div>
+                            <div class="example">"Winning the World Cup brings a wave of nationalistic pride across the country."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard fc-sport" data-cat="sport" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Reinforcement</div>
+                            <div class="pos">noun</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">The process of strengthening or encouraging a behavior or idea.</div>
+                            <div class="vn">Sự củng cố</div>
+                            <div class="example">"Sports serve as a reinforcement of national identity and unity."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard fc-sport" data-cat="sport" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Diplomatic Status</div>
+                            <div class="pos">noun phrase</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">The position or standing of a country in international relations.</div>
+                            <div class="vn">Vị thế ngoại giao</div>
+                            <div class="example">"Hosting the Olympics can elevate a country's diplomatic status on the world stage."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard fc-sport" data-cat="sport" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Allegiance</div>
+                            <div class="pos">noun</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">Loyalty or commitment to a leader, group, or cause.</div>
+                            <div class="vn">Sự trung thành</div>
+                            <div class="example">"Fans show their allegiance to the national team by wearing the country's colors."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard fc-sport" data-cat="sport" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Discipline</div>
+                            <div class="pos">noun</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">The practice of training people to obey rules or a code of behavior; self-control.</div>
+                            <div class="vn">Kỷ luật</div>
+                            <div class="example">"Sports teach young people the value of discipline and hard work."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard fc-sport" data-cat="sport" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Predominantly</div>
+                            <div class="pos">adverb</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">Mainly; for the most part.</div>
+                            <div class="vn">Chủ yếu, phần lớn</div>
+                            <div class="example">"Football is predominantly the most popular sport in South America."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard fc-sport" data-cat="sport" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Curb</div>
+                            <div class="pos">verb</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">To restrain or keep in check; to control or limit something.</div>
+                            <div class="vn">Kiềm chế, hạn chế</div>
+                            <div class="example">"Sports can help curb violence by channeling aggression into fair competition."</div>
+                        </div>
+                    </div>
+                </div>
                 <div class="flashcard fc-skill" data-cat="skill" onclick="this.classList.toggle('flipped')">
                     <div class="flashcard-inner">
                         <div class="flashcard-front">
@@ -1154,10 +1436,12 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Pagination -->
+            <div class="pagination fade-in" id="vocabPagination"></div>
+
         </div>
     </section>
-
-    <!-- REFLECTION -->
     <section id="reflection">
         <div class="container">
             <div class="section-header fade-in">
@@ -1204,20 +1488,64 @@
 
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-        // Flashcard filter
+        // Flashcard filter + pagination
+        const CARDS_PER_PAGE = 9;
+        let currentPage = 1;
+        let currentCat = 'all';
+
+        function getFilteredCards() {
+            const all = Array.from(document.querySelectorAll('.flashcard'));
+            if (currentCat === 'all') return all;
+            return all.filter(c => c.dataset.cat === currentCat);
+        }
+
+        function renderPage() {
+            const cards = getFilteredCards();
+            const totalPages = Math.max(1, Math.ceil(cards.length / CARDS_PER_PAGE));
+            if (currentPage > totalPages) currentPage = totalPages;
+
+            // Hide all, then show only current page
+            document.querySelectorAll('.flashcard').forEach(c => {
+                c.style.display = 'none';
+                c.classList.remove('flipped');
+            });
+
+            const start = (currentPage - 1) * CARDS_PER_PAGE;
+            const end = start + CARDS_PER_PAGE;
+            cards.slice(start, end).forEach(c => c.style.display = 'block');
+
+            // Build pagination
+            const pag = document.getElementById('vocabPagination');
+            if (totalPages <= 1) { pag.innerHTML = ''; return; }
+
+            let html = '';
+            html += `<button class="page-arrow" onclick="goPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>&lsaquo;</button>`;
+            for (let i = 1; i <= totalPages; i++) {
+                html += `<button onclick="goPage(${i})" class="${i === currentPage ? 'active' : ''}">${i}</button>`;
+            }
+            html += `<button class="page-arrow" onclick="goPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>&rsaquo;</button>`;
+            html += `<span class="page-info">${start + 1}&ndash;${Math.min(end, cards.length)} / ${cards.length} từ</span>`;
+            pag.innerHTML = html;
+        }
+
+        function goPage(p) {
+            const cards = getFilteredCards();
+            const totalPages = Math.ceil(cards.length / CARDS_PER_PAGE);
+            if (p < 1 || p > totalPages) return;
+            currentPage = p;
+            renderPage();
+        }
+
         function filterCards(cat) {
             document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
-
-            document.querySelectorAll('.flashcard').forEach(card => {
-                if (cat === 'all' || card.dataset.cat === cat) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-                card.classList.remove('flipped');
-            });
+            currentCat = cat;
+            currentPage = 1;
+            renderPage();
         }
+
+        // Initial render
+        renderPage();
     </script>
 </body>
 </html>
