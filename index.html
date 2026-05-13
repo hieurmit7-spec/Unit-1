@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 1 - The Art of Active Reading</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #dbeafe;
+            --accent: #f59e0b;
+            --accent-light: #fef3c7;
+            --go-color: #6366f1;
+            --go-light: #e0e7ff;
+            --memory-color: #a855f7;
+            --memory-light: #f3e8ff;
+            --sport-color: #10b981;
+            --sport-light: #d1fae5;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --light-gray: #f1f5f9;
+            --white: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+            --radius: 16px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            line-height: 1.7;
+            background: var(--light-gray);
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            padding: 0 2rem;
+            transition: box-shadow 0.3s;
+        }
+
+        nav.scrolled { box-shadow: var(--shadow); }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links { display: flex; gap: 0.5rem; list-style: none; }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray);
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--primary); background: var(--primary-light); }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #06b6d4 100%);
+            color: white;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(255,255,255,0.05) 0%, transparent 40%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-2%, 2%) rotate(1deg); }
+        }
+
+        .hero-content { position: relative; z-index: 1; max-width: 800px; }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-nav {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-nav a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.6rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary-dark);
+        }
+
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-xl); }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-secondary:hover { background: rgba(255,255,255,0.25); }
+
+        /* ===== SECTIONS ===== */
+        section { padding: 5rem 2rem; }
+
+        .container { max-width: 1100px; margin: 0 auto; }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 0.35rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ===== ACTIVE READING SECTION ===== */
+        #about { background: white; }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .about-text p { color: var(--gray); margin-bottom: 1rem; }
+
+        .comparison-box {
+            background: var(--light-gray);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .comparison-row.header { font-weight: 700; font-size: 0.9rem; }
+
+        .comparison-cell {
+            padding: 1rem 1.5rem;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .passive-cell { background: #fef2f2; color: #991b1b; }
+        .active-cell { background: #f0fdf4; color: #166534; }
+
+        .passive-header { background: #fca5a5; color: #7f1d1d; text-align: center; }
+        .active-header { background: #86efac; color: #14532d; text-align: center; }
+
+        /* ===== SKILLS SECTION ===== */
+        #skills { background: var(--light-gray); }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 4px solid var(--primary);
+        }
+
+        .skill-card:nth-child(2) { border-top-color: var(--accent); }
+
+        .skill-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-xl); }
+
+        .skill-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-card:first-child .skill-icon { background: var(--primary-light); }
+        .skill-card:nth-child(2) .skill-icon { background: var(--accent-light); }
+
+        .skill-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .skill-card p { color: var(--gray); font-size: 0.95rem; margin-bottom: 1rem; }
+
+        .skill-example {
+            background: var(--light-gray);
+            border-left: 3px solid var(--primary);
+            padding: 1rem 1.2rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.88rem;
+            color: var(--gray);
+            font-style: italic;
+        }
+
+        .skill-card:nth-child(2) .skill-example { border-left-color: var(--accent); }
+
+        /* ===== CASE STUDIES ===== */
+        #cases { background: white; }
+
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .case-card {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            background: white;
+        }
+
+        .case-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-xl); }
+
+        .case-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .case-img::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.3));
+        }
+
+        .case-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            padding: 0.3rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+            z-index: 1;
+        }
+
+        .case-body { padding: 1.8rem; }
+
+        .case-body h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .case-body .subtitle {
+            font-size: 0.85rem;
+            color: var(--gray);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .case-body p { font-size: 0.9rem; color: var(--gray); line-height: 1.7; }
+
+        .key-lesson {
+            margin-top: 1.2rem;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 0.85rem;
+        }
+
+        .key-lesson strong { display: block; margin-bottom: 0.3rem; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .case-go .case-badge, .case-go .key-lesson { background: var(--go-light); color: var(--go-color); }
+        .case-go .case-badge { background: var(--go-color); color: white; }
+
+        .case-memory .case-badge, .case-memory .key-lesson { background: var(--memory-light); color: var(--memory-color); }
+        .case-memory .case-badge { background: var(--memory-color); color: white; }
+
+        .case-sport .case-badge, .case-sport .key-lesson { background: var(--sport-light); color: var(--sport-color); }
+        .case-sport .case-badge { background: var(--sport-color); color: white; }
+
+        /* ===== VOCABULARY ===== */
+        #vocab { background: var(--light-gray); }
+
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1rem;
+        }
+
+        .flashcard {
+            perspective: 1000px;
+            height: 220px;
+            cursor: pointer;
+        }
+
+        .flashcard-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+
+        .flashcard-front, .flashcard-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: var(--radius);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .flashcard-front {
+            background: white;
+            box-shadow: var(--shadow);
+            border: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .flashcard:hover .flashcard-front { border-color: var(--primary); }
+
+        .flashcard-front .word {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .flashcard-front .pos {
+            font-size: 0.8rem;
+            color: var(--gray);
+            background: var(--light-gray);
+            padding: 0.2rem 0.8rem;
+            border-radius: 50px;
+            margin-bottom: 1rem;
+        }
+
+        .flashcard-front .hint {
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .flashcard-back {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-back .definition {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+        }
+
+        .flashcard-back .vn {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        .flashcard-back .example {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            margin-top: 0.8rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* Category colors for flashcards */
+        .fc-go .flashcard-back { background: linear-gradient(135deg, var(--go-color), #4338ca); }
+        .fc-memory .flashcard-back { background: linear-gradient(135deg, var(--memory-color), #7c3aed); }
+        .fc-sport .flashcard-back { background: linear-gradient(135deg, var(--sport-color), #059669); }
+        .fc-skill .flashcard-back { background: linear-gradient(135deg, var(--accent), #d97706); }
+
+        .vocab-instruction {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        .vocab-instruction span {
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 0.2rem 0.7rem;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        /* Category filter buttons */
+        .filter-btns {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            border: 2px solid var(--light-gray);
+            background: white;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        /* ===== REFLECTION ===== */
+        #reflection { background: white; }
+
+        .reflection-card {
+            max-width: 750px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #faf5ff, #ede9fe, #dbeafe);
+            border-radius: var(--radius);
+            padding: 3rem;
+            position: relative;
+        }
+
+        .reflection-card::before {
+            content: '\201C';
+            font-family: 'Playfair Display', serif;
+            font-size: 8rem;
+            position: absolute;
+            top: -1rem;
+            left: 1.5rem;
+            color: var(--primary);
+            opacity: 0.15;
+            line-height: 1;
+        }
+
+        .reflection-card blockquote {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--dark);
+            position: relative;
+            z-index: 1;
+        }
+
+        .reflection-card .author {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--dark);
+            color: rgba(255,255,255,0.7);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        footer h3 {
+            font-family: 'Playfair Display', serif;
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        footer p { font-size: 0.9rem; margin-bottom: 0.5rem; }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer a:hover { text-decoration: underline; }
+
+        .footer-divider {
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+            margin: 1.5rem auto;
+            border-radius: 2px;
+        }
+
+        .email-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 0.7rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .email-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); background: #fbbf24; }
+
+        /* ===== SCROLL ANIMATIONS ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 2.5rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .cases-grid { grid-template-columns: 1fr; }
+            .vocab-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1rem; }
+            .section-header h2 { font-size: 1.8rem; }
+            .nav-links { display: none; }
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 1rem;
+                box-shadow: var(--shadow-lg);
+            }
+            .mobile-menu-btn { display: block; }
+            .reflection-card { padding: 2rem; }
+            .hero-nav { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav id="navbar">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">Unit 1 Portfolio</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">Active Reading</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#cases">Case Studies</a></li>
+                <li><a href="#vocab">Vocabulary</a></li>
+                <li><a href="#reflection">Reflection</a></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="document.getElementById('navLinks').classList.toggle('open')">&#9776;</button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">Digital Portfolio</div>
+            <h1>The Art of<br>Active Reading</h1>
+            <p>Have you ever read a whole page and remembered nothing? That is passive reading. In this unit, I learned how to become an <strong>active reader</strong> &mdash; someone who questions, connects, and truly understands every text.</p>
+            <div class="hero-nav">
+                <a href="#cases" class="btn-primary">Explore Case Studies</a>
+                <a href="#vocab" class="btn-secondary">Flashcards</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT ACTIVE READING -->
+    <section id="about">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-tag">Introduction</div>
+                <h2>What is Active Reading?</h2>
+                <p>Understanding the difference between truly reading and just looking at words</p>
+            </div>
+
+            <div class="about-grid fade-in">
+                <div class="about-text">
+                    <h3>Why Active Reading Matters</h3>
+                    <p><strong>Active Reading</strong> is a method of engaging with a text by questioning, annotating, summarizing, and connecting ideas as you read &mdash; rather than just letting your eyes move across the page.</p>
+                    <p>Unlike <strong>passive reading</strong> (where you read without thinking deeply), active reading helps you <em>understand</em>, <em>remember</em>, and <em>think critically</em> about what you've read.</p>
+                    <p>Through this unit, I discovered that reading is not a one-way street. It is a conversation between you and the author.</p>
+                </div>
+
+                <div class="comparison-box">
+                    <div class="comparison-row header">
+                        <div class="comparison-cell passive-header">Passive Reading</div>
+                        <div class="comparison-cell active-header">Active Reading</div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comparison-cell passive-cell">Just looking at words</div>
+                        <div class="comparison-cell active-cell">Asking questions while reading</div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comparison-cell passive-cell">Forgetting after one page</div>
+                        <div class="comparison-cell active-cell">Taking notes &amp; highlighting</div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comparison-cell passive-cell">No connection to real life</div>
+                        <div class="comparison-cell active-cell">Connecting ideas to experience</div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comparison-cell passive-cell">Reading once and done</div>
+                        <div class="comparison-cell active-cell">Reviewing and summarizing</div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comparison-cell passive-cell">Low understanding</div>
+                        <div class="comparison-cell active-cell">Deep comprehension</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-tag">Core Skills</div>
+                <h2>Skimming &amp; Scanning</h2>
+                <p>Two essential techniques every active reader must master</p>
+            </div>
+
+            <div class="skills-grid fade-in">
+                <div class="skill-card">
+                    <div class="skill-icon">&#128218;</div>
+                    <h3>Skimming</h3>
+                    <p>Reading <strong>quickly</strong> to get the <strong>gist</strong> (main idea) of a text. You look at headings, first sentences of paragraphs, and keywords without reading every word.</p>
+                    <div class="skill-example">
+                        <strong>Example:</strong> Before an exam, you skim through all chapter titles to know which topics to review first.
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">&#128269;</div>
+                    <h3>Scanning</h3>
+                    <p>Reading to find <strong>specific details</strong> &mdash; like a name, date, or number. Your eyes move quickly across the page, searching for one piece of information.</p>
+                    <div class="skill-example">
+                        <strong>Example:</strong> You scan a restaurant menu to find the price of your favorite dish.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CASE STUDIES -->
+    <section id="cases">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-tag">Case Studies</div>
+                <h2>What We Read</h2>
+                <p>Three fascinating topics explored through active reading</p>
+            </div>
+
+            <div class="cases-grid fade-in">
+                <!-- GO -->
+                <div class="case-card case-go">
+                    <div class="case-img" style="background-image: url('https://images.unsplash.com/photo-1585169777872-1c31d4a24755?w=600&q=80'); background-color: var(--go-light);">
+                        <div class="case-badge">Strategy</div>
+                    </div>
+                    <div class="case-body">
+                        <h3>The Game of Go</h3>
+                        <div class="subtitle">Lateral Thinking &amp; Strategy</div>
+                        <p>An ancient board game that requires deep thinking. Unlike chess, Go requires players to think about the whole board, encouraging creative and flexible problem-solving.</p>
+                        <div class="key-lesson">
+                            <strong>Key Lesson</strong>
+                            It teaches "lateral thinking" &mdash; thinking creatively outside the rules. Players must build a smart strategy to control empty space, sometimes accepting a <em>tactical loss</em> to achieve <em>eventual</em> victory.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MEMORIES -->
+                <div class="case-card case-memory">
+                    <div class="case-img" style="background-image: url('https://images.unsplash.com/photo-1559757175-5700dde675bc?w=600&q=80'); background-color: var(--memory-light);">
+                        <div class="case-badge">Psychology</div>
+                    </div>
+                    <div class="case-body">
+                        <h3>Memories</h3>
+                        <div class="subtitle">Specific vs. Generic Memories</div>
+                        <p>How our brain stores information in two main types. <strong>Generic memories</strong> are things we do every day. <strong>Episodic memories</strong> are special, one-time events.</p>
+                        <div class="key-lesson">
+                            <strong>Key Lesson</strong>
+                            Our memories are <em>fluid</em> &mdash; they can change over time. Active reading helps our brain create strong, specific memories. <em>Life-threatening events</em> are recorded deeply by the brain.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SPORTS -->
+                <div class="case-card case-sport">
+                    <div class="case-img" style="background-image: url('https://images.unsplash.com/photo-1461896836934-bd45ba8fcf9b?w=600&q=80'); background-color: var(--sport-light);">
+                        <div class="case-badge">Society</div>
+                    </div>
+                    <div class="case-body">
+                        <h3>Sports</h3>
+                        <div class="subtitle">How Games Unify a Nation</div>
+                        <p>Games that can unite a whole nation. Sports are the "moral equivalent of war." They require courage and teamwork, offering a safe way to show national power.</p>
+                        <div class="key-lesson">
+                            <strong>Key Lesson</strong>
+                            Sports help build <em>self-identity</em> and <em>unify</em> different groups across many <em>spheres</em> of society &mdash; from politics to culture &mdash; creating a shared sense of pride.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VOCABULARY FLASHCARDS -->
+    <section id="vocab">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-tag">Vocabulary</div>
+                <h2>Interactive Flashcards</h2>
+                <p>Click any card to flip and reveal the definition</p>
+            </div>
+
+            <div class="vocab-instruction fade-in">
+                <span>Click</span> a card to flip it &nbsp;|&nbsp; <span>Click again</span> to flip back
+            </div>
+
+            <div class="filter-btns fade-in">
+                <button class="filter-btn active" onclick="filterCards('all')">All (18)</button>
+                <button class="filter-btn" onclick="filterCards('go')">The Game of Go</button>
+                <button class="filter-btn" onclick="filterCards('memory')">Memories</button>
+                <button class="filter-btn" onclick="filterCards('sport')">Sports</button>
+                <button class="filter-btn" onclick="filterCards('skill')">Reading Skills</button>
+            </div>
+
+            <div class="vocab-grid fade-in" id="vocabGrid">
+
+                <!-- GO VOCABULARY -->
+                <div class="flashcard fc-go" data-cat="go" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Tactical Loss</div>
+                            <div class="pos">noun phrase</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">A small loss that you accept on purpose to gain a bigger advantage later.</div>
+                            <div class="vn">Thua co chien thuat</div>
+                            <div class="example">"In Go, a player may accept a tactical loss of a few stones to win control of the whole board."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard fc-go" data-cat="go" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Strategic</div>
+                            <div class="pos">adjective</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">Carefully planned to achieve a long-term goal.</div>
+                            <div class="vn">Mang tinh chien luoc</div>
+                            <div class="example">"A good reader is strategic &mdash; they choose to skim or scan depending on their purpose."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard fc-go" data-cat="go" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">The Vast Number Of</div>
+                            <div class="pos">phrase</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">A very large amount of something.</div>
+                            <div class="vn">So luong khong lo</div>
+                            <div class="example">"The vast number of possible moves in Go exceeds the number of atoms in the universe."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard fc-go" data-cat="go" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Resource Allocation</div>
+                            <div class="pos">noun phrase</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">The process of deciding how to share limited things (time, money, people) among different needs.</div>
+                            <div class="vn">Phan bo nguon luc</div>
+                            <div class="example">"The game of Go teaches resource allocation &mdash; players must decide where to place their limited stones."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard fc-go" data-cat="go" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Eventual</div>
+                            <div class="pos">adjective</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">Happening at the end of a process or period of time.</div>
+                            <div class="vn">Cuoi cung, sau cung</div>
+                            <div class="example">"A small sacrifice now can lead to eventual victory in the game."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MEMORY VOCABULARY -->
+                <div class="flashcard fc-memory" data-cat="memory" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Episodic</div>
+                            <div class="pos">adjective</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">Related to specific, individual events or episodes in life.</div>
+                            <div class="vn">Theo tung su kien</div>
+                            <div class="example">"An episodic memory is like a short movie of one event in your life."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard fc-memory" data-cat="memory" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Generic</div>
+                            <div class="pos">adjective</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">Common and not specific; relating to a general type.</div>
+                            <div class="vn">Chung chung</div>
+                            <div class="example">"A generic memory is something general, like 'I eat breakfast every day.'"</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard fc-memory" data-cat="memory" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Correspond To</div>
+                            <div class="pos">verb phrase</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">To match or be directly related to something else.</div>
+                            <div class="vn">Tuong ung voi</div>
+                            <div class="example">"Episodic memories correspond to specific moments, like your first day of school."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard fc-memory" data-cat="memory" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Life-Threatening Events</div>
+                            <div class="pos">noun phrase</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">Dangerous situations that could cause death.</div>
+                            <div class="vn">Su kien de doa tinh mang</div>
+                            <div class="example">"People often have very strong memories of life-threatening events because the brain records them deeply."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard fc-memory" data-cat="memory" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Fluid</div>
+                            <div class="pos">adjective</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">Able to change easily; not fixed or rigid.</div>
+                            <div class="vn">Linh hoat / Hay thay doi</div>
+                            <div class="example">"Our memories are not fixed &mdash; they are fluid and can change over time."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SPORT VOCABULARY -->
+                <div class="flashcard fc-sport" data-cat="sport" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Sphere</div>
+                            <div class="pos">noun</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">An area of activity, interest, or influence.</div>
+                            <div class="vn">Linh vuc / Pham vi</div>
+                            <div class="example">"Sports influence many spheres of society, from politics to culture."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard fc-sport" data-cat="sport" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Self-Identity</div>
+                            <div class="pos">noun</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">The way a person sees and defines who they are.</div>
+                            <div class="vn">Ban sac ca nhan</div>
+                            <div class="example">"Cheering for a national team helps build a country's self-identity."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard fc-sport" data-cat="sport" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Unify</div>
+                            <div class="pos">verb</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">To bring different people together to form one group.</div>
+                            <div class="vn">Thong nhat, doan ket</div>
+                            <div class="example">"The World Cup can unify a whole nation behind one team."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard fc-sport" data-cat="sport" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Foster</div>
+                            <div class="pos">verb</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">To help something grow or develop.</div>
+                            <div class="vn">Nuoi duong, thuc day</div>
+                            <div class="example">"Sports foster a sense of pride and unity in a nation."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard fc-sport" data-cat="sport" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Equivalent</div>
+                            <div class="pos">noun</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">Something that has the same value or function as another thing.</div>
+                            <div class="vn">Su tuong duong / Thay the</div>
+                            <div class="example">"Sports are the moral equivalent of war &mdash; a peaceful way to compete."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- READING SKILLS -->
+                <div class="flashcard fc-skill" data-cat="skill" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Lateral</div>
+                            <div class="pos">adjective</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">A creative, indirect way of thinking or solving problems.</div>
+                            <div class="vn">Sang tao, gian tiep</div>
+                            <div class="example">"Lateral thinking means looking at a problem from a completely new angle."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard fc-skill" data-cat="skill" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Passive</div>
+                            <div class="pos">adjective</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">Not actively participating; just receiving information without engaging.</div>
+                            <div class="vn">Thu dong</div>
+                            <div class="example">"Passive reading means your eyes see words but your brain is not working."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard fc-skill" data-cat="skill" onclick="this.classList.toggle('flipped')">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="word">Strategy</div>
+                            <div class="pos">noun</div>
+                            <div class="hint">Click to reveal</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="definition">A carefully made plan designed to achieve a long-term goal.</div>
+                            <div class="vn">Chien luoc</div>
+                            <div class="example">"A good reading strategy is to preview the headings before you start reading."</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REFLECTION -->
+    <section id="reflection">
+        <div class="container">
+            <div class="section-header fade-in">
+                <div class="section-tag">Personal Reflection</div>
+                <h2>What I Learned</h2>
+                <p>Looking back on the most interesting lessons from Unit 1</p>
+            </div>
+
+            <div class="reflection-card fade-in">
+                <blockquote>
+                    The most interesting thing I learned is that active reading turns words into real knowledge. I also discovered that sports can unify a whole nation, just like a peaceful war. These lessons taught me that thinking deeply &mdash; whether reading a book or watching a game &mdash; is the key to understanding the world.
+                    <br><br>
+                    Through this unit, I realized that active reading is much better than just looking at words. Skills like skimming and scanning will save me a lot of time when I study for my exams.
+                </blockquote>
+                <div class="author">&mdash; A Freshman Student, Unit 1 Portfolio</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <h3>Unit 1 &mdash; The Art of Active Reading</h3>
+        <p>Digital Portfolio Project</p>
+        <div class="footer-divider"></div>
+        <p>Contact: <a href="mailto:chinth@fe.edu.vn">chinth@fe.edu.vn</a></p>
+        <a href="mailto:chinth@fe.edu.vn" class="email-btn">Email Me</a>
+        <p style="margin-top:1.5rem; font-size: 0.8rem; opacity: 0.5;">Created for English Reading Skills Class &bull; 2026</p>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Flashcard filter
+        function filterCards(cat) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.querySelectorAll('.flashcard').forEach(card => {
+                if (cat === 'all' || card.dataset.cat === cat) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+                card.classList.remove('flipped');
+            });
+        }
+    </script>
+</body>
+</html>
